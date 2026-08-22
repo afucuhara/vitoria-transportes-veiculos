@@ -1,0 +1,15 @@
+import type { MetadataRoute } from "next";
+
+export default function manifest(): MetadataRoute.Manifest {
+  return {
+    name: "Vitória Transportes de Veículos",
+    short_name: "Vitória Transportes",
+    description: "Transporte de veículos e frotas com segurança em todo o Brasil.",
+    start_url: "/",
+    display: "standalone",
+    background_color: "#071c12",
+    theme_color: "#071c12",
+    lang: "pt-BR",
+    icons: [{ src: "/vitoria-logo.png", sizes: "300x100", type: "image/png" }],
+  };
+}

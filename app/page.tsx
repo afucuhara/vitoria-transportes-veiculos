@@ -1,3 +1,5 @@
+import ScrollReveal from "./scroll-reveal";
+
 const Icon = ({ name }: { name: string }) => {
   const paths: Record<string, React.ReactNode> = {
     car: <><path d="M5 17h14l-1.5-5.5a2 2 0 0 0-1.9-1.5H8.4a2 2 0 0 0-1.9 1.5L5 17Z"/><path d="M7 17v2M17 17v2M4 14h16M8 14h.01M16 14h.01"/></>,
@@ -16,7 +18,7 @@ const Icon = ({ name }: { name: string }) => {
 };
 
 const WhatsAppIcon = () => (
-  <img className="whatsapp-icon" src="/whatsapp.png" alt="" aria-hidden="true" />
+  <img className="whatsapp-icon" src="/whatsapp.webp" alt="" aria-hidden="true" width="52" height="52" />
 );
 
 const services = [
@@ -27,19 +29,28 @@ const services = [
 ];
 
 const partnerLogos = [
-  { name:"Movida", src:"/partner-movida.png" },
-  { name:"Localiza", src:"/partner-localiza.png" },
-  { name:"BYD", src:"/partner-byd.jpg" },
+  { name:"Movida", src:"/partner-movida.webp" },
+  { name:"Localiza", src:"/partner-localiza.webp" },
+  { name:"BYD", src:"/partner-byd.webp" },
   { name:"LM Mobilidade", src:"/partner-lm.svg" },
-  { name:"CS Brasil", src:"/partner-cs.jpg" },
+  { name:"CS Brasil", src:"/partner-cs.webp" },
 ];
+
+const structuredData = { "@context":"https://schema.org", "@graph":[
+  { "@type":"Organization", "@id":"https://vitoria-transportes-veiculos.patriciavolt9.chatgpt.site/#organization", name:"Vitória Transportes de Veículos", url:"https://vitoria-transportes-veiculos.patriciavolt9.chatgpt.site", logo:"https://vitoria-transportes-veiculos.patriciavolt9.chatgpt.site/vitoria-logo.png", description:"Transporte de veículos com segurança, tecnologia e atendimento próximo." },
+  { "@type":"LocalBusiness", "@id":"https://vitoria-transportes-veiculos.patriciavolt9.chatgpt.site/#local-business", name:"Vitória Transportes de Veículos", image:"https://vitoria-transportes-veiculos.patriciavolt9.chatgpt.site/vitoria-logo.png", url:"https://vitoria-transportes-veiculos.patriciavolt9.chatgpt.site", address:{"@type":"PostalAddress",addressLocality:"Ilhéus",addressRegion:"BA",addressCountry:"BR"}, areaServed:{"@type":"Country",name:"Brasil"}, parentOrganization:{"@id":"https://vitoria-transportes-veiculos.patriciavolt9.chatgpt.site/#organization"} },
+  { "@type":"TransportationService", "@id":"https://vitoria-transportes-veiculos.patriciavolt9.chatgpt.site/#service", name:"Transporte de veículos e frotas", provider:{"@id":"https://vitoria-transportes-veiculos.patriciavolt9.chatgpt.site/#organization"}, areaServed:{"@type":"Country",name:"Brasil"}, serviceType:["Transporte de veículos leves","Transporte dedicado","Transporte compartilhado","Movimentação de frotas"] },
+  { "@type":"WebSite", "@id":"https://vitoria-transportes-veiculos.patriciavolt9.chatgpt.site/#website", url:"https://vitoria-transportes-veiculos.patriciavolt9.chatgpt.site", name:"Vitória Transportes de Veículos", inLanguage:"pt-BR", publisher:{"@id":"https://vitoria-transportes-veiculos.patriciavolt9.chatgpt.site/#organization"} }
+]};
 
 export default function Home() {
   return (
     <main>
+      <ScrollReveal />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(structuredData)}} />
       <header className="site-header">
         <a className="brand" href="#inicio" aria-label="Vitória Transportes — início">
-          <img src="/vitoria-logo.png" alt="Vitória Transportes" />
+          <img className="brand-logo" src="/vitoria-logo.png" alt="Vitória Transportes" width="300" height="100" />
         </a>
         <nav className="desktop-nav" aria-label="Navegação principal">
           <a href="#empresa">A empresa</a><a href="#servicos">Soluções</a><a href="#diferenciais">Diferenciais</a><a href="#atuacao">Atuação</a>
@@ -54,8 +65,8 @@ export default function Home() {
       <section className="hero" id="inicio">
         <div className="hero-glow"></div>
         <div className="hero-inner">
-          <div className="hero-copy">
-            <p className="eyebrow"><span></span> Logística que gera confiança</p>
+          <div className="hero-copy reveal-on-scroll">
+            <p className="eyebrow">Logística que gera confiança</p>
             <h1>Seu veículo em boas mãos, <em>do início ao destino.</em></h1>
             <p className="hero-text">Transporte de veículos leves com segurança, tecnologia e acompanhamento próximo em cada etapa da operação.</p>
             <div className="hero-actions">
@@ -63,7 +74,7 @@ export default function Home() {
               <a className="btn btn-ghost" href="#servicos">Conhecer soluções</a>
             </div>
           </div>
-          <aside className="hero-card">
+          <aside className="hero-card reveal-on-scroll">
             <div className="hero-card-icon"><Icon name="shield" /></div>
             <p>Compromisso Vitória</p>
             <strong>Segurança e transparência em todo o percurso.</strong>
@@ -77,13 +88,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="logos" aria-label="Empresas que confiam na Vitória Transportes">
+      <section className="logos reveal-on-scroll" aria-label="Empresas que confiam na Vitória Transportes">
         <p>Grandes empresas já confiam em nosso trabalho</p>
         <div className="logo-marquee">
           <div className="logo-track">
             {[...partnerLogos,...partnerLogos].map((logo,index) => (
               <span className="partner-logo" key={logo.name + "-" + index}>
-                <img src={logo.src} alt={logo.name} loading="lazy" referrerPolicy="no-referrer" />
+                <img src={logo.src} alt={logo.name} width="185" height="82" loading="lazy" decoding="async" referrerPolicy="no-referrer" />
               </span>
             ))}
           </div>
@@ -91,25 +102,25 @@ export default function Home() {
       </section>
 
       <section className="about section" id="empresa">
-        <div className="section-heading side-heading">
-          <p className="eyebrow dark"><span></span> Quem somos</p>
+        <div className="section-heading side-heading reveal-on-scroll">
+          <p className="eyebrow dark">Quem somos</p>
           <h2>Nascemos para elevar o padrão do <em>transporte de veículos.</em></h2>
         </div>
-        <div className="about-copy">
+        <div className="about-copy reveal-on-scroll">
           <p className="lead">A Vitória Transportes de Veículos nasceu em Ilhéus com uma ideia simples e ambiciosa: fazer logística com mais excelência, proximidade e confiança.</p>
           <p>Com experiência consolidada no setor, fomos concebidos livres de vícios corporativos e com uma cultura orientada por resultados. Agilidade, flexibilidade operacional e pontualidade são princípios inegociáveis.</p>
         </div>
       </section>
 
       <section className="services section" id="servicos">
-        <div className="section-heading centered">
-          <p className="eyebrow dark"><span></span> Soluções logísticas</p>
+        <div className="section-heading centered reveal-on-scroll">
+          <p className="eyebrow dark">Soluções logísticas</p>
           <h2>A modalidade certa para <em>cada operação.</em></h2>
           <p>Do transporte de uma unidade à movimentação estratégica de frotas, desenhamos a solução ideal para sua necessidade.</p>
         </div>
         <div className="service-grid">
           {services.map((service) => (
-            <article className="service-card" key={service.title}>
+            <article className="service-card reveal-on-scroll" key={service.title}>
               <h3>{service.title}</h3><p>{service.text}</p>
               <a href="#cotacao">Solicitar cotação <Icon name="arrow"/></a>
             </article>
@@ -118,15 +129,15 @@ export default function Home() {
       </section>
 
       <section className="control" id="diferenciais">
-        <div className="control-visual">
-          <img src="/vitoria-control-center.png" alt="Central de monitoramento de operações logísticas" />
+        <div className="control-visual reveal-on-scroll">
+          <img src="/vitoria-control-center.webp" alt="Central de monitoramento de operações logísticas" width="1600" height="900" loading="lazy" decoding="async" />
           <div className="control-status"><span></span><small>OPERAÇÃO ACOMPANHADA</small><strong>Visibilidade em cada etapa</strong></div>
         </div>
-        <div className="control-copy">
-          <p className="eyebrow"><span></span> Inteligência logística</p>
+        <div className="control-copy reveal-on-scroll">
+          <p className="eyebrow">Inteligência logística</p>
           <h2>Tecnologia que transforma dados em <em>tranquilidade.</em></h2>
           <p>Investimos em tecnologia de ponta para monitorar, planejar e executar processos com precisão. Você ganha visibilidade, previsibilidade e segurança durante toda a operação.</p>
-          <div className="benefit-list">
+          <div className="benefit-list reveal-on-scroll">
             <div><Icon name="signal"/><span><strong>Acompanhamento preciso</strong><small>Mais controle sobre cada movimentação.</small></span></div>
             <div><Icon name="clock"/><span><strong>Decisões mais rápidas</strong><small>Agilidade para antecipar necessidades.</small></span></div>
             <div><Icon name="shield"/><span><strong>Menos risco, mais confiança</strong><small>Processos planejados para proteger seu patrimônio.</small></span></div>
@@ -135,12 +146,12 @@ export default function Home() {
       </section>
 
       <section className="why section">
-        <div className="section-heading side-heading">
-          <p className="eyebrow dark"><span></span> Por que a Vitória</p>
+        <div className="section-heading side-heading reveal-on-scroll">
+          <p className="eyebrow dark">Por que a Vitória</p>
           <h2>Uma parceira estratégica, não apenas uma transportadora.</h2>
           <a className="text-link" href="#cotacao">Conversar com um especialista <Icon name="arrow"/></a>
         </div>
-        <div className="why-grid">
+        <div className="why-grid reveal-on-scroll">
           <article><Icon name="users"/><h3>Atendimento humano</h3><p>Comunicação próxima, clara e acessível antes, durante e depois da operação.</p></article>
           <article><Icon name="route"/><h3>Flexibilidade operacional</h3><p>Soluções moldadas ao seu volume, prazo, rota e particularidades.</p></article>
           <article><Icon name="clock"/><h3>Pontualidade real</h3><p>Planejamento rigoroso para cumprir o prazo acordado com responsabilidade.</p></article>
@@ -149,24 +160,24 @@ export default function Home() {
       </section>
 
       <section className="coverage" id="atuacao">
-        <div className="coverage-copy">
-          <p className="eyebrow"><span></span> Conectamos o Brasil</p>
+        <div className="coverage-copy reveal-on-scroll">
+          <p className="eyebrow">Conectamos o Brasil</p>
           <h2>De Ilhéus para onde o seu negócio precisar.</h2>
           <p>Mais do que movimentar veículos, conectamos negócios, pessoas e projetos. Cada rota é planejada para unir eficiência, confiabilidade e responsabilidade.</p>
           <div className="coverage-stats"><div><strong>Brasil</strong><small>alcance operacional</small></div><div><strong>360°</strong><small>visão da operação</small></div><div><strong>1:1</strong><small>atendimento próximo</small></div></div>
         </div>
-        <div className="coverage-map"><img src="/vitoria-brazil-network.png" alt="Rede de rotas logísticas conectando o Brasil" /></div>
+        <div className="coverage-map reveal-on-scroll"><img src="/vitoria-brazil-network.webp" alt="Rede de rotas logísticas conectando o Brasil" width="1000" height="1000" loading="lazy" decoding="async" /></div>
       </section>
 
       <section className="quote section" id="cotacao">
-        <div className="quote-box">
+        <div className="quote-box reveal-on-scroll">
           <div className="quote-copy">
-            <p className="eyebrow"><span></span> Vamos planejar sua rota?</p>
+            <p className="eyebrow">Vamos planejar sua rota?</p>
             <h2>Seu próximo transporte começa com uma boa conversa.</h2>
             <p>Conte de onde o veículo sai, para onde vai e qual é sua necessidade. Nossa equipe prepara a solução mais segura e eficiente para sua operação.</p>
             <div className="quote-steps"><span>Origem e destino</span><span>Veículo e quantidade</span><span>Prazo desejado</span></div>
           </div>
-          <div className="quote-card">
+          <div className="quote-card reveal-on-scroll">
             <h3>Solicite uma cotação personalizada</h3>
             <p>Receba orientação para escolher entre transporte dedicado ou compartilhado.</p>
             <a className="btn btn-primary" href="https://www.facebook.com/p/Vit%C3%B3ria-Transportadora-de-Ve%C3%ADculos-61576329165590/" target="_blank" rel="noreferrer"><WhatsAppIcon /> Falar com a equipe</a>
@@ -176,7 +187,7 @@ export default function Home() {
       </section>
 
       <footer>
-        <div className="footer-brand"><img src="/vitoria-logo.png" alt="Vitória Transportes" /></div>
+        <div className="footer-brand"><img className="brand-logo" src="/vitoria-logo.png" alt="Vitória Transportes" width="300" height="100" /></div>
         <p>Transportando confiança, conectando resultados.</p>
         <nav><a href="#empresa">A empresa</a><a href="#servicos">Soluções</a><a href="#diferenciais">Diferenciais</a><a href="#cotacao">Contato</a></nav>
         <small>© 2026 Vitória Transportes de Veículos. Todos os direitos reservados.</small>
