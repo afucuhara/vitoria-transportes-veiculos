@@ -1,4 +1,5 @@
 import ScrollReveal from "./scroll-reveal";
+import GalleryCarousel from "./gallery-carousel";
 
 const Icon = ({ name }: { name: string }) => {
   const paths: Record<string, React.ReactNode> = {
@@ -22,10 +23,11 @@ const WhatsAppIcon = () => (
 );
 
 const services = [
-  { title:"Transporte de veículos leves", text:"Operação especializada para automóveis, utilitários leves e veículos de passeio, com cuidado em cada etapa — da coleta à entrega." },
-  { title:"Transporte compartilhado", text:"Seu veículo compartilha a capacidade da cegonha com outras entregas compatíveis. Mais economia, sem abrir mão do nosso padrão de segurança." },
-  { title:"Transporte dedicado", text:"Uma operação exclusiva, planejada para demandas urgentes, lotes estratégicos e prazos que exigem prioridade total." },
-  { title:"Movimentação de frotas", text:"Soluções flexíveis para locadoras, concessionárias, montadoras e empresas que precisam movimentar veículos com previsibilidade." },
+  { title:"Transporte de veículos leves", text:"Operação especializada para automóveis, utilitários leves e veículos de passeio, com cuidado em cada etapa — da coleta à entrega.", benefits:["Proteção em todas as etapas do transporte.","Acompanhamento próximo da coleta à entrega.","Planejamento seguro para cada rota."], idealFor:"Concessionárias, locadoras e empresas que precisam movimentar veículos com previsibilidade.", cta:"Solicitar orçamento de transporte" },
+  { title:"Transporte compartilhado", text:"Seu veículo compartilha a capacidade da cegonha com outras entregas compatíveis. Mais economia sem abrir mão do nosso padrão de segurança.", benefits:["Otimização de custos logísticos.","Rotas planejadas para maior eficiência.","Segurança e rastreabilidade da operação."], idealFor:"Empresas que buscam economia e flexibilidade para transportar veículos em rotas planejadas.", cta:"Solicitar orçamento compartilhado" },
+  { title:"Transporte dedicado", text:"Uma operação exclusiva, planejada para demandas urgentes, lotes estratégicos e prazos que exigem prioridade total.", benefits:["Veículo e rota exclusivos para sua operação.","Mais agilidade para prazos prioritários.","Gestão dedicada do início ao destino."], idealFor:"Operações urgentes, cargas estratégicas e empresas que não podem esperar.", cta:"Solicitar orçamento dedicado" },
+  { title:"Movimentação de frotas", text:"Soluções flexíveis para locadoras, concessionárias, montadoras e empresas que precisam movimentar veículos com previsibilidade.", benefits:["Planejamento de lotes e múltiplas rotas.","Visibilidade sobre cada movimentação.","Escala para operações recorrentes."], idealFor:"Locadoras, concessionárias, montadoras e gestores de frotas.", cta:"Solicitar orçamento de frota" },
+  { title:"Armazenagem", text:"Gestão e guarda inteligente dos seus veículos e materiais, com uma estrutura preparada para proteger seus ativos e apoiar a distribuição.", benefits:["Segurança e controle do inventário.","Flexibilidade para acompanhar picos de demanda.","Redução de custos com uma operação integrada."], idealFor:"Empresas que precisam de um ponto logístico seguro antes da distribuição final.", cta:"Solicitar orçamento de armazenagem" },
 ];
 
 const partnerLogos = [
@@ -67,7 +69,7 @@ export default function Home() {
         <div className="hero-inner">
           <div className="hero-copy reveal-on-scroll">
             <p className="eyebrow">Logística que gera confiança</p>
-            <h1>Seu veículo em boas mãos, <em>do início ao destino.</em></h1>
+            <h1>Seu veículo em boas mãos, <em>a todo momento.</em></h1>
             <p className="hero-text">Transporte de veículos leves com segurança, tecnologia e acompanhamento próximo em cada etapa da operação.</p>
             <div className="hero-actions">
               <a className="btn btn-primary" href="#cotacao">Planejar meu transporte <Icon name="arrow" /></a>
@@ -121,8 +123,13 @@ export default function Home() {
         <div className="service-grid">
           {services.map((service) => (
             <article className="service-card reveal-on-scroll" key={service.title}>
-              <h3>{service.title}</h3><p>{service.text}</p>
-              <a href="#cotacao">Solicitar cotação <Icon name="arrow"/></a>
+              <h3>{service.title}</h3>
+              <p className="service-description">{service.text}</p>
+              <strong className="service-label">Benefícios</strong>
+              <ul>{service.benefits.map((benefit) => <li key={benefit}><Icon name="check" />{benefit}</li>)}</ul>
+              <strong className="service-label">Ideal para</strong>
+              <p className="service-ideal-copy">{service.idealFor}</p>
+              <a className="service-cta" href="#cotacao">{service.cta} <Icon name="arrow"/></a>
             </article>
           ))}
         </div>
@@ -161,12 +168,13 @@ export default function Home() {
 
       <section className="coverage" id="atuacao">
         <div className="coverage-copy reveal-on-scroll">
+          <img className="coverage-copy-map" src="/vitoria-brazil-network.webp" alt="" aria-hidden="true" width="1000" height="1000" loading="lazy" decoding="async" />
           <p className="eyebrow">Conectamos o Brasil</p>
           <h2>De Ilhéus para onde o seu negócio precisar.</h2>
           <p>Mais do que movimentar veículos, conectamos negócios, pessoas e projetos. Cada rota é planejada para unir eficiência, confiabilidade e responsabilidade.</p>
           <div className="coverage-stats"><div><strong>Brasil</strong><small>alcance operacional</small></div><div><strong>360°</strong><small>visão da operação</small></div><div><strong>1:1</strong><small>atendimento próximo</small></div></div>
         </div>
-        <div className="coverage-map reveal-on-scroll"><img src="/vitoria-brazil-network.webp" alt="Rede de rotas logísticas conectando o Brasil" width="1000" height="1000" loading="lazy" decoding="async" /></div>
+        <div className="coverage-map reveal-on-scroll"><GalleryCarousel /></div>
       </section>
 
       <section className="quote section" id="cotacao">
