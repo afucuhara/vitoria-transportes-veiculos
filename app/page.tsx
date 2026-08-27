@@ -22,6 +22,10 @@ const WhatsAppIcon = () => (
   <img className="whatsapp-icon" src="/whatsapp.webp" alt="" aria-hidden="true" width="52" height="52" />
 );
 
+const whatsappMessage = "Olá, vim através do Google e gostaria de um atendimento!";
+const whatsappUrl = `https://wa.me/5571993927640?text=${encodeURIComponent(whatsappMessage)}`;
+const whatsappSecondaryUrl = `https://wa.me/5573981092461?text=${encodeURIComponent(whatsappMessage)}`;
+
 const services = [
   { title:"Transporte de veículos leves", text:"Operação especializada para automóveis, utilitários leves e veículos de passeio, com cuidado em cada etapa — da coleta à entrega.", benefits:["Proteção em todas as etapas do transporte.","Acompanhamento próximo da coleta à entrega.","Planejamento seguro para cada rota."], idealFor:"Concessionárias, locadoras e empresas que precisam movimentar veículos com previsibilidade.", cta:"Solicitar orçamento de transporte" },
   { title:"Transporte compartilhado", text:"Seu veículo compartilha a capacidade da cegonha com outras entregas compatíveis. Mais economia sem abrir mão do nosso padrão de segurança.", benefits:["Otimização de custos logísticos.","Rotas planejadas para maior eficiência.","Segurança e rastreabilidade da operação."], idealFor:"Empresas que buscam economia e flexibilidade para transportar veículos em rotas planejadas.", cta:"Solicitar orçamento compartilhado" },
@@ -57,7 +61,7 @@ export default function Home() {
         <nav className="desktop-nav" aria-label="Navegação principal">
           <a href="#empresa">A empresa</a><a href="#servicos">Soluções</a><a href="#diferenciais">Diferenciais</a><a href="#atuacao">Atuação</a>
         </nav>
-        <a className="header-cta" href="#cotacao"><WhatsAppIcon /> Solicitar cotação</a>
+        <a className="header-cta" href={whatsappUrl} target="_blank" rel="noreferrer"><WhatsAppIcon /> Solicitar cotação</a>
         <details className="mobile-menu">
           <summary aria-label="Abrir menu"><span></span><span></span><span></span></summary>
           <nav><a href="#empresa">A empresa</a><a href="#servicos">Soluções</a><a href="#diferenciais">Diferenciais</a><a href="#cotacao">Cotação</a></nav>
@@ -72,7 +76,7 @@ export default function Home() {
             <h1>Seu veículo em boas mãos, <em>a todo momento.</em></h1>
             <p className="hero-text">Transporte de veículos leves com segurança, tecnologia e acompanhamento próximo em cada etapa da operação.</p>
             <div className="hero-actions">
-              <a className="btn btn-primary" href="#cotacao">Planejar meu transporte <Icon name="arrow" /></a>
+            <a className="btn btn-primary" href={whatsappUrl} target="_blank" rel="noreferrer">Planejar meu transporte <Icon name="arrow" /></a>
               <a className="btn btn-ghost" href="#servicos">Conhecer soluções</a>
             </div>
           </div>
@@ -129,7 +133,7 @@ export default function Home() {
               <ul>{service.benefits.map((benefit) => <li key={benefit}><Icon name="check" />{benefit}</li>)}</ul>
               <strong className="service-label">Ideal para</strong>
               <p className="service-ideal-copy">{service.idealFor}</p>
-              <a className="service-cta" href="#cotacao">{service.cta} <Icon name="arrow"/></a>
+              <a className="service-cta" href={whatsappUrl} target="_blank" rel="noreferrer">{service.cta} <Icon name="arrow"/></a>
             </article>
           ))}
         </div>
@@ -156,7 +160,7 @@ export default function Home() {
         <div className="section-heading side-heading reveal-on-scroll">
           <p className="eyebrow dark">Por que a Vitória</p>
           <h2>Uma parceira estratégica, não apenas uma transportadora.</h2>
-          <a className="text-link" href="#cotacao">Conversar com um especialista <Icon name="arrow"/></a>
+          <a className="text-link" href={whatsappUrl} target="_blank" rel="noreferrer">Conversar com um especialista <Icon name="arrow"/></a>
         </div>
         <div className="why-grid reveal-on-scroll">
           <article><Icon name="users"/><h3>Atendimento humano</h3><p>Comunicação próxima, clara e acessível antes, durante e depois da operação.</p></article>
@@ -188,7 +192,7 @@ export default function Home() {
           <div className="quote-card reveal-on-scroll">
             <h3>Solicite uma cotação personalizada</h3>
             <p>Receba orientação para escolher entre transporte dedicado ou compartilhado.</p>
-            <a className="btn btn-primary" href="https://www.facebook.com/p/Vit%C3%B3ria-Transportadora-de-Ve%C3%ADculos-61576329165590/" target="_blank" rel="noreferrer"><WhatsAppIcon /> Falar com a equipe</a>
+            <a className="btn btn-primary" href={whatsappUrl} target="_blank" rel="noreferrer"><WhatsAppIcon /> Falar com a equipe</a>
             <small>Atendimento comercial • Ilhéus, Bahia</small>
           </div>
         </div>
@@ -197,10 +201,14 @@ export default function Home() {
       <footer>
         <div className="footer-brand"><img className="brand-logo" src="/vitoria-logo.png" alt="Vitória Transportes" width="300" height="100" /></div>
         <p>Transportando confiança, conectando resultados.</p>
+        <div className="footer-contacts" aria-label="Telefones de contato">
+          <a href={whatsappUrl} target="_blank" rel="noreferrer"><WhatsAppIcon /> 71 99392-7640</a>
+          <a href={whatsappSecondaryUrl} target="_blank" rel="noreferrer"><WhatsAppIcon /> 73 98109-2461</a>
+        </div>
         <nav><a href="#empresa">A empresa</a><a href="#servicos">Soluções</a><a href="#diferenciais">Diferenciais</a><a href="#cotacao">Contato</a></nav>
         <small>© 2026 Vitória Transportes de Veículos. Todos os direitos reservados.</small>
       </footer>
-      <a className="floating-contact" href="#cotacao" aria-label="Solicitar cotação pelo WhatsApp"><WhatsAppIcon /></a>
+      <a className="floating-contact" href={whatsappUrl} target="_blank" rel="noreferrer" aria-label="Solicitar cotação pelo WhatsApp"><WhatsAppIcon /></a>
     </main>
   );
 }
